@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>School View - Show Car Line</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="#">{{request.session.school_name}}</a>
+
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{request.session.greeting}} </a> 
+                    <a href="/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">
+                        Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- TABLE -->
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th><abbr title="Zone">Zone</abbr></th>
+            <th><abbr title="First Name">First Name</abbr></th>
+            <th><abbr title="Last Name">Last Name</abbr></th>
+            <th><abbr title="Grade">Grade</abbr></th>
+            <th><abbr title="Teacher">Teacher</abbr></th>
+            <th><abbr title="Car ID">Rider #</abbr></th>
+            <th><abbr title="Status">Status</abbr></th>
+            <th><abbr title="Actions">Actions</abbr></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for rider in all_riders %}
+
+          <tr>
+            <th>1</th>
+            <td><a href="/riders/{{rider.id}}">{{rider.first_name}}</a>
+            <td>{{rider.last_name}}</td>
+            <td>{{rider.grade}}</td>
+            <td>{{rider.teacher}}</td>
+            <td>{{rider.carID}}</td>
+            <td>{{rider.status}}</td>
+            <td><a href="#" title="Actions">Move to NEXT | Move to HOLD | Dismiss</a></td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+</body>
+</html>

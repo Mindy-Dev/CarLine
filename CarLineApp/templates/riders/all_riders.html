@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://kit.fontawesome.com/b223643843.js" crossorigin="anonymous"></script>
+
+    <title>Welcome Page / Show All User's Riders</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://unpkg.com/ionicons@4.3.0/dist/ionicons.js"></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="#">{{request.session.rider.school_name}}</a>
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{request.session.greeting}} </a>
+                    <a href="/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">
+                        Logout</a>
+
+                    <a href="/profile/{{request.session.user_id}}" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">
+                        Edit My Account</a>
+                </span>
+            </div>
+        </div>
+    </nav><!-- /NAVBAR -->
+
+    <div class="container">
+        <span style="font-size: 4rem;">
+            <span style="color: rgb(53, 121, 47);">
+                <i class="fas fa-x fa-child"></i>
+                <a href="/riders/{{all_riders.id}}/pickup">Pick Up!</a>
+            </span>
+        </span>
+        <div class="col-6 px-2">
+            {% for all_riders in current_user.added_riders.all %}
+            <ul>
+                <li><a href="/riders/{{all_riders.id}}">{{all_riders.first_name}}</a></li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-6 px-2">
+            <a href="/riders/create">Add a Rider!</a>
+            <span style="font-size: 4rem;">
+                <span style="color: rgb(241, 132, 42);">
+                    <i class="fas fa-x fa-child"></i>
+                </span>
+            </span>
+        </div>
+
+
+</body>
+
+</html>

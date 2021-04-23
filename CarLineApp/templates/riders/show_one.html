@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>One User's Riders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Your Riders</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{request.session.greeting}} <a href="/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav><!-- /NAVBAR -->
+    <a href="/riders">Go Back</a>
+
+    <table class="table">
+        <thead>
+            <h3>Your Riders</h3>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for all_riders in current_user.added_riders.all %}
+            <tr>
+                <td>{{ all_riders.first_name }}</td>
+                <td>
+                    <form action="/riders/{{all_riders.id }}/pickup" method='POST'>
+                    {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <button class="btn btn-success" type="submit">Pick Up</button>
+            </form></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
